@@ -25,7 +25,7 @@ services:
         max-size: 10m
         max-file: "3"
     ports:
-      - '5438:5432'
+      - "5438:5432"
     volumes:
       # copy the sql script to create tables
       - ./sql/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
@@ -78,4 +78,4 @@ services:
       - example_db
     # this command is not necessary when deploying OPAL for real, it is simply a trick for dev environments
     # to make sure that opal-server is already up before starting the client.
-    command: sh -c "wait-for-it --service opal_server:7002 --service example_db:5432 --timeout 60 -- /start.sh"
+    # command: sh -c "wait-for-it --service opal_server:7002 --service example_db:5432 --timeout 60 -- /start.sh"
