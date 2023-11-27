@@ -22,5 +22,5 @@ CREATE TABLE IF NOT EXISTS role_resource_mapping (
   tenant_id VARCHAR(50) NOT NULL,
   resource_id VARCHAR(50) NOT NULL,
   action varchar(50) NOT NULL,
-  PRIMARY KEY (user_id, tenant_id, resource_id, action)
+  PRIMARY KEY (role_id, tenant_id, resource_id, action)
 );
