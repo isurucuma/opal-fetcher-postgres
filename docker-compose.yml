@@ -43,7 +43,7 @@ services:
       # - if this repo is not public, you can pass an ssh key via `OPAL_POLICY_REPO_SSH_KEY`)
       # - the repo we pass in this example is *public* and acts as an example repo with dummy rego policy
       # - for more info, see: https://github.com/permitio/opal/blob/master/docs/HOWTO/track_a_git_repo.md
-      - OPAL_POLICY_REPO_URL=https://github.com/permitio/opal-example-policy-repo
+      - OPAL_POLICY_REPO_URL=https://github.com/isurucuma/opal-fetcher-postgres
       # in this example we will use a polling interval of 30 seconds to check for new policy updates (git commits affecting the rego policy).
       # however, it is better to utilize a git *webhook* to trigger the server to check for changes only when the repo has new commits.
       # for more info see: https://github.com/permitio/opal/blob/master/docs/HOWTO/track_a_git_repo.md
