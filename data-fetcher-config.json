@@ -1,0 +1,36 @@
+{
+  "config": {
+    "entries": [
+      {
+        "url": "postgresql://postgres@example_db:5432/postgres",
+        "config": {
+          "fetcher": "PostgresFetchProvider",
+          "query": "SELECT * from user_resource_whitelist;",
+          "connection_params": { "password": "postgres" }
+        },
+        "topics": ["policy_data"],
+        "dst_path": "user_resource_whitelist"
+      },
+      {
+        "url": "postgresql://postgres@example_db:5432/postgres",
+        "config": {
+          "fetcher": "PostgresFetchProvider",
+          "query": "SELECT * from user_resource_blacklist;",
+          "connection_params": { "password": "postgres" }
+        },
+        "topics": ["policy_data"],
+        "dst_path": "user_resource_blacklist"
+      },
+      {
+        "url": "postgresql://postgres@example_db:5432/postgres",
+        "config": {
+          "fetcher": "PostgresFetchProvider",
+          "query": "SELECT * from role_resource_mapping;",
+          "connection_params": { "password": "postgres" }
+        },
+        "topics": ["policy_data"],
+        "dst_path": "role_resource_mapping"
+      }
+    ]
+  }
+}
