@@ -4,6 +4,14 @@ import future.keywords.in
 
 default allow_resource_access := false
 
+allow_resource_add {
+	"role_admin" in input.user.roles
+}
+
+allow_resource_add {
+	"role_publisher" in input.user.roles
+}
+
 allow_resource_access {
 	"role_admin" in input.user.roles
 }
