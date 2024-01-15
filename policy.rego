@@ -16,11 +16,6 @@ allow_resource_access {
 	"role_admin" in input.user.roles
 }
 
-allow {
-    allow_resource_access
-    pools
-}
-
 allow_resource_access {
 	is_not_fine_grained_enabled_resource
 	"role_publisher" in input.user.roles
@@ -87,15 +82,4 @@ is_resource_has_role_mapping {
 	some resource in data.role_resource_mapping
 	resource.resource_id == input.user.resource_id
 	resource.resource_type == input.user.resource_type
-}
-
-pools {
-    resource_id = input.user.resource_id
-    resource_type = input.user.resource_type
-    resource_id = role_resource_mapping[_].resource_id
-    resource_type = role_resource_mapping[_].resource_type
-    resource_id = user_resource_whitelist[_].resource_id
-    resource_type = user_resource_whitelist[_].resource_type
-    resource_id = user_resource_blacklist[_].resource_id
-    resource_type = user_resource_blacklist[_].resource_type
 }
