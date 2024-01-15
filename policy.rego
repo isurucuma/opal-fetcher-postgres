@@ -23,13 +23,13 @@ allow_resource_access {
 
 allow_resource_access {
 	user_in_whitelist
-    "role_publisher" in input.user.roles
+	"role_publisher" in input.user.roles
 }
 
 allow_resource_access {
 	user_role_has_mapping
 	not user_in_blacklist
-    "role_publisher" in input.user.roles
+	"role_publisher" in input.user.roles
 }
 
 user_in_whitelist {
@@ -82,4 +82,48 @@ is_resource_has_role_mapping {
 	some resource in data.role_resource_mapping
 	resource.resource_id == input.user.resource_id
 	resource.resource_type == input.user.resource_type
+}
+
+set_of_access_controlled_resources[item.resource_id] {
+	some item in data.user_resource_whitelist
+	item.resource_type == input.user.resource_type
+	item.action == "view"
+}
+
+set_of_access_controlled_resources[item.resource_id] {
+	some item in data.role_resource_mapping
+	item.resource_type == input.user.resource_type
+	item.action == "view"
+}
+
+set_all_resource_ids[resource] {
+	some resource in input.user.resource_ids
+}
+
+set_of_free_resources := set_all_resource_ids - set_of_access_controlled_resources
+
+set_of_accessible_resources[item] {
+	some item in set_of_free_resources
+}
+
+set_of_accessible_resources[item.resource_id] {
+	some item in data.user_resource_whitelist
+	item.resource_type == input.user.resource_type
+	item.action == "view"
+	item.user_id == input.user.user_id
+}
+
+blacklist_of_user_blocked_resources[item.resource_id] {
+	some item in data.user_resource_blacklist
+	item.resource_type == input.user.resource_type
+	item.action == "view"
+	item.user_id == input.user.user_id
+}
+
+set_of_accessible_resources[item.resource_id] {
+	some item in data.role_resource_mapping
+	item.resource_type == input.user.resource_type
+	item.action == "view"
+	item.role_id in input.user.roles
+    not item.resource_id in blacklist_of_user_blocked_resources
 }
