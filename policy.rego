@@ -3,6 +3,7 @@ package policy
 import future.keywords.in
 
 default allow_resource_access := false
+default allow_resource_add := false
 
 is_admin {
 	"role_admin" in input.user.roles
